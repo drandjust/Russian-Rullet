@@ -1,98 +1,106 @@
-import random as ran
+import random
 from time import sleep
 
-# main game
-# for print blank.
+# For print blank.
 def blank():
     print("#"*25)
 
-# continue? yes or no.
+# Continue? yes or no.
 def confirm():
     for i in range(0, 10):
-        confirm = input("계속 하겠는가? [Y/N] : ").upper()
-        if confirm == "Y":
+        confirm = input("Continue? [Y/N] : ")
+        if confirm.upper() == "Y":
             break
-        if confirm == "N":
-            print("출구는 없습니다..")
-            if i > 4:
-                print("씨발 좀")
+        # When player enter 'N' over 4 times, print nahh man.
+        if confirm.upper() == "N":
+            if i < 4:
+                print("You must play this game.")
+            else:
+                print("nahh man")
+        # Please enter 'Y' or 'N'.
         else:
-            print("Y 또는 N을 입력.")
+            if i < 4:
+                print("Please try again.")
+            else:
+                print("Are you stupid?")
 
-    print("게임을 계속 진행합니다.")
+    # When player doesn't enter 'Y' over 10 times, just continue the game.
+    print("Continue the game.")
 
-# guess the number.
+# Guess the number.
 def guess(diffculty):
     while True:
-        print("1 부터 "+str(diffculty)+" 사이의 정수를 입력하라.")
-        userGuess = input("입력: ")
+        print("Enter the number between 1 and "+str(diffculty)+".")
+        userGuess = input("Enter: ")
+        # Try transfer type.
         try:
             userGuess = int(userGuess)
+            # Check range.
             if userGuess in range (1, diffculty+1):
                 return userGuess
             else:
-                print("다시 입력하라.")
+                print("Try again.")
         except ValueError:
-            print("다시 입력하라.")
+            print("Try again.")
 
-# number == userGuess True or False.
+# number == userGuess, True or False.
 def game(userGuess, number):
     if userGuess == int(number):
-        print("player의 승리.")
+        print("player win.")
     else:
-        print("CPU의 승리.")
-        print("후, 이번만입니다...")
+        print("CPU win.")
+        sleep(1.5)
+        print("os.rmdir")
 
-# main game.
+# Main game.
 def mainGame():
+    # intro.
     blank()
-    print("게임을 시작하지")
+    print("Let's play a game.")
     blank()
-    sleep(2.5)
-
-    print("난이도를 선택하라.")
+    sleep(1.5)
+    print("Set diffculty.")
 
     # Set diffculty.
     # I wanted to make this roop a function.. But I can't.
     while True:
-        print("2 부터 10 사이의 정수를 선택하라.")
-        diffculty = input("입력: ")
+        print("Enter the number between 2 and 10.")
+        diffculty = input("Enter: ")
         try:
             diffculty = int(diffculty)
-            # U can choose diffculty between 2 and 10.
+            # Choose diffculty between 2 and 10.
             if diffculty in range (2, 11):
                 break
             else:
-                print("다시 입력하라.")
+                print("Try again.")
         except ValueError:
-            print("다시 입력하라.")
+            print("Try again.")
 
     diffculty = int(diffculty)
-    number = ran.randrange(1,diffculty)
+    number = random.randrange(1,diffculty)
 
     # Debuger
     # print(number)
 
-    blank()
-    print("Russian Rullet")
-    print("숫자를 틀리면 시스템이 초기화됩니다.")
-    blank()
-    sleep(2.5)
-
     userGuess = guess(diffculty)
-    sleep(2.5)
+    sleep(1.5)
 
     confirm()
-    sleep(2.5)
+    sleep(1.5)
 
     game(userGuess, number)
-    sleep(2.5)
+    sleep(1.5)
+    blank()
 
-# start game. (Old version.)
-# while True:
-#     print("게임을 시작하려면 Y를, 아니면 아무 키를 입력하시오.")
-#     accept = input("입력: ").upper()
-#     if accept == "Y":
-#         mainGame()
-#     else:
-#         break
+# Start game.
+while True:
+    print("Enter Y to start.")
+    print("Enter any key except Y to exit.")
+    accept = input("Enter: ")
+
+    if accept.upper() == "Y":
+        mainGame()
+    else:
+        print("Exit the game . . .")
+        sleep(2.5)
+        break
