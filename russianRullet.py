@@ -1,24 +1,30 @@
 import random as ran
 from time import sleep
 
+# main game
+# for print blank.
 def blank():
-    print("#"*15)
+    print("#"*25)
 
+# continue? yes or no.
 def confirm():
-    while True:
+    for i in range(0, 10):
         confirm = input("계속 하겠는가? [Y/N] : ").upper()
         if confirm == "Y":
-            print("당신의 선택입니다 ! ! !")
-            sleep(3.5)
             break
         if confirm == "N":
             print("출구는 없습니다..")
+            if i > 4:
+                print("씨발 좀")
         else:
             print("Y 또는 N을 입력.")
 
+    print("게임을 계속 진행합니다.")
+
+# guess the number.
 def guess(diffculty):
     while True:
-        print("1 부터", str(diffculty), "사이의 정수를 입력하라.")
+        print("1 부터 "+str(diffculty)+" 사이의 정수를 입력하라.")
         userGuess = input("입력: ")
         try:
             userGuess = int(userGuess)
@@ -29,6 +35,7 @@ def guess(diffculty):
         except ValueError:
             print("다시 입력하라.")
 
+# number == userGuess True or False.
 def game(userGuess, number):
     if userGuess == int(number):
         print("player의 승리.")
@@ -36,6 +43,7 @@ def game(userGuess, number):
         print("CPU의 승리.")
         print("후, 이번만입니다...")
 
+# main game.
 def mainGame():
     blank()
     print("게임을 시작하지")
@@ -44,12 +52,14 @@ def mainGame():
 
     print("난이도를 선택하라.")
 
-    # 함수로 빼고 싶었는데.. 도저히 못 빼겠습니다.
+    # Set diffculty.
+    # I wanted to make this roop a function.. But I can't.
     while True:
         print("2 부터 10 사이의 정수를 선택하라.")
         diffculty = input("입력: ")
         try:
             diffculty = int(diffculty)
+            # U can choose diffculty between 2 and 10.
             if diffculty in range (2, 11):
                 break
             else:
@@ -59,7 +69,9 @@ def mainGame():
 
     diffculty = int(diffculty)
     number = ran.randrange(1,diffculty)
-    # print(number) 디버거
+
+    # Debuger
+    # print(number)
 
     blank()
     print("Russian Rullet")
@@ -76,11 +88,11 @@ def mainGame():
     game(userGuess, number)
     sleep(2.5)
 
-# 게임 실행
-while True:
-    print("게임을 시작하려면 Y를, 아니면 아무 키를 입력하시오.")
-    accept = input("입력: ").upper()
-    if accept == "Y":
-        mainGame()
-    else:
-        break
+# start game. (Old version.)
+# while True:
+#     print("게임을 시작하려면 Y를, 아니면 아무 키를 입력하시오.")
+#     accept = input("입력: ").upper()
+#     if accept == "Y":
+#         mainGame()
+#     else:
+#         break
