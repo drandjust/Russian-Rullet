@@ -1,11 +1,11 @@
 import random
 from time import sleep
 
-# For print blank.
+# Print blank.
 def blank():
     print("#"*25)
 
-# Continue? yes or no.
+# Continue? Yes or no.
 def confirm():
     for i in range(0, 10):
         confirm = input("Continue? [Y/N] : ")
@@ -14,7 +14,7 @@ def confirm():
         # When player enter 'N' over 4 times, print nahh man.
         if confirm.upper() == "N":
             if i < 4:
-                print("You must play this game.")
+                print("You must play the game.")
             else:
                 print("nahh man")
         # Please enter 'Y' or 'N'.
